@@ -6,8 +6,11 @@ class BahiKhata extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
+    return MaterialApp(
       debugShowCheckedModeBanner: false,
+      theme: ThemeData(
+        scaffoldBackgroundColor: Color(0xfff0f0f0),
+      ),
       home: SafeArea(child: DashBoard()),
     );
   }
