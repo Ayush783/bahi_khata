@@ -26,7 +26,7 @@ flutter:
   fonts:
     - family: proza
       fonts:
-        - asset: fonts/ProzaLibre-Regular.ttf
+        - asset: assets/fonts/ProzaLibre-Regular.ttf
     - family: ptsans
       fonts:
-        - asset: fonts/PTSans-Regular.ttf
+        - asset: assets/fonts/PTSans-Regular.ttf
