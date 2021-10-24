@@ -1,5 +1,9 @@
+import 'package:bahi_khata/constants/colors.dart';
+import 'package:bahi_khata/constants/textstyles.dart';
+import 'package:bahi_khata/ui/widgets/daily_transaction_list.dart';
 import 'package:bahi_khata/ui/widgets/header.dart';
 import 'package:flutter/material.dart';
+import 'package:timelines/timelines.dart';
 
 class DashBoard extends StatelessWidget {
   const DashBoard({Key? key}) : super(key: key);
@@ -15,8 +19,13 @@ class DashBoard extends StatelessWidget {
           Padding(
             padding: EdgeInsets.only(top: 24, left: 24),
             child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text('Transactions made today'),
+                Text(
+                  'Transactions made today',
+                  style: kTextstyle2.copyWith(color: kprimary, fontSize: 20),
+                ),
+                DailyTansactionList(),
               ],
             ),
           ),
