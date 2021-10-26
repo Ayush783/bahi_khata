@@ -11,7 +11,9 @@ class BahiKhata extends StatelessWidget {
       theme: ThemeData(
         scaffoldBackgroundColor: Color(0xfff0f0f0),
       ),
-      home: SafeArea(child: DashBoard()),
+      home: SafeArea(
+        child: DashboardBlocProvider(),
+      ),
     );
   }
 }

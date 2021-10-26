@@ -1,10 +1,35 @@
+import 'package:bahi_khata/blocs/fakeapi_bloc.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:timelines/timelines.dart';
+
+class DailyTransactionsBuilder extends StatelessWidget {
+  const DailyTransactionsBuilder({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocBuilder<FakeapiBloc, FakeapiState>(
+      builder: (context, state) {
+        if (state is FetchingDailyTransactions)
+          return CircularProgressIndicator();
+        else if (state is DailyTransactionsFetched)
+          return DailyTansactionList(
+            data: state.data,
+          );
+        else
+          return Container();
+      },
+    );
+  }
+}
 
 class DailyTansactionList extends StatelessWidget {
   const DailyTansactionList({
     Key? key,
+    this.data,
   }) : super(key: key);
+
+  final List<Map<String, dynamic>>? data;
 
   @override
   Widget build(BuildContext context) {
