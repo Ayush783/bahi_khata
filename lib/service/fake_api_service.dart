@@ -1,7 +1,8 @@
 import 'package:bahi_khata/extensions.dart';
+import 'package:bahi_khata/models/daily_transactions.dart';
 
 class FakeApiService {
-  Future<List<Map<String, dynamic>>> getFakeDailyTransactions() async {
+  Future<DailyTransaction> getFakeDailyTransactions() async {
     final List<Map<String, dynamic>> fakeData = [
       {
         'name': 'Prachi fast food',
@@ -17,6 +18,6 @@ class FakeApiService {
       },
     ];
     await Future.delayed(3.seconds());
-    return fakeData;
+    return DailyTransaction.success(fakeData);
   }
 }

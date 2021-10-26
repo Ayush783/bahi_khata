@@ -1,5 +1,5 @@
 class DailyTransaction {
-  final List<Map<String, String>> list;
+  final List<Map<String, dynamic>> list;
   final bool error;
   final String errorMessage;
 
@@ -10,7 +10,7 @@ class DailyTransaction {
         errorMessage = errorMessage,
         list = [];
 
-  DailyTransaction.success(List<Map<String, String>> data)
+  DailyTransaction.success(List<Map<String, dynamic>> data)
       : list = data,
         error = false,
         errorMessage = 'NO_ERROR';
