@@ -31,6 +31,8 @@ class DailyTansactionList extends StatelessWidget {
   }) : super(key: key);
 
   final List<Map<String, dynamic>>? data;
+  ValueNotifier<List<Map<String, dynamic>>> get listOnScreen =>
+      ValueNotifier(data!.sublist(0, 2));
 
   @override
   Widget build(BuildContext context) {
@@ -40,13 +42,13 @@ class DailyTansactionList extends StatelessWidget {
       width: size.width,
       child: Timeline.tileBuilder(
         builder: TimelineTileBuilder(
-          itemCount: 3,
+          itemCount: listOnScreen.value.length + 1,
           indicatorBuilder: (context, index) {
             if (index == 0)
               return ListIndicator(
                 type: 0,
               );
-            else if (index == 1)
+            else if (index == listOnScreen.value.length)
               return ListIndicator(
                 type: 1,
               );
@@ -132,12 +134,9 @@ class ListIndicator extends StatelessWidget {
             border: Border.all(color: Color(0xff606060), width: 2),
             shape: BoxShape.circle,
           ),
-          child: Container(
-            margin: EdgeInsets.all(8),
-            decoration: BoxDecoration(
-              color: Color(0xff606060),
-              shape: BoxShape.circle,
-            ),
+          child: Icon(
+            Icons.keyboard_arrow_down_rounded,
+            color: Color(0xff606060),
           ),
         );
       default:
@@ -148,9 +147,12 @@ class ListIndicator extends StatelessWidget {
             border: Border.all(color: Color(0xff606060), width: 2),
             shape: BoxShape.circle,
           ),
-          child: Icon(
-            Icons.keyboard_arrow_down_rounded,
-            color: Color(0xff606060),
+          child: Container(
+            margin: EdgeInsets.all(8),
+            decoration: BoxDecoration(
+              color: Color(0xff606060),
+              shape: BoxShape.circle,
+            ),
           ),
         );
     }
