@@ -1,4 +1,5 @@
 import 'package:bahi_khata/blocs/fakeapi_bloc.dart';
+import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:timelines/timelines.dart';
@@ -105,14 +106,23 @@ class ListIndicator extends StatelessWidget {
   Widget build(BuildContext context) {
     switch (type) {
       case 0:
-        return Container(
-          height: 32,
-          width: 32,
-          decoration: BoxDecoration(
-            border: Border.all(color: Color(0xff606060), width: 2),
-            shape: BoxShape.circle,
+        return DottedBorder(
+          color: Color(0xff606060),
+          borderType: BorderType.Circle,
+          dashPattern: [6],
+          padding: EdgeInsets.zero,
+          strokeWidth: 2,
+          child: Container(
+            height: 32,
+            width: 32,
+            decoration: BoxDecoration(
+              shape: BoxShape.circle,
+            ),
+            child: Icon(
+              Icons.add_outlined,
+              color: Color(0xff606060),
+            ),
           ),
-          child: Icon(Icons.add_outlined),
         );
       case 1:
         return Container(
@@ -138,7 +148,10 @@ class ListIndicator extends StatelessWidget {
             border: Border.all(color: Color(0xff606060), width: 2),
             shape: BoxShape.circle,
           ),
-          child: Icon(Icons.keyboard_arrow_down_rounded),
+          child: Icon(
+            Icons.keyboard_arrow_down_rounded,
+            color: Color(0xff606060),
+          ),
         );
     }
   }
