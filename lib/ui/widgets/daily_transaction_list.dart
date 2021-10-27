@@ -34,6 +34,19 @@ class DailyTansactionList extends StatelessWidget {
   ValueNotifier<List<Map<String, dynamic>>> get listOnScreen =>
       ValueNotifier(data!.sublist(0, 2));
 
+  Color getCardColor(int value) {
+    switch (value) {
+      case 0:
+        return Color(0xffB21F1F);
+      case 1:
+        return Color(0xff30A034);
+      case 2:
+        return Color(0xffAB9F2F);
+      default:
+        return Color(0xff297BB7);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
@@ -66,8 +79,15 @@ class DailyTansactionList extends StatelessWidget {
             else
               return Container(
                 decoration: BoxDecoration(
-                  color: index % 2 == 0 ? Colors.red : Colors.green,
+                  color: getCardColor(listOnScreen.value[index - 1]['pay_id']),
                   borderRadius: BorderRadius.circular(24),
+                  boxShadow: [
+                    BoxShadow(
+                      offset: Offset(3, 3),
+                      blurRadius: 10,
+                      color: Colors.black.withOpacity(0.4),
+                    ),
+                  ],
                 ),
                 margin: EdgeInsets.symmetric(vertical: 8, horizontal: 16),
               );
@@ -81,6 +101,8 @@ class DailyTansactionList extends StatelessWidget {
                 dash: 4,
                 gap: 4,
               );
+            else if (index == listOnScreen.value.length)
+              return Connector.transparent();
             else
               return Connector.solidLine();
           },

@@ -23,14 +23,14 @@ class FakeApiService {
         'amount': 220,
         'made_with': 'none',
         'time': '8:10 am',
-        'pay_id': 3, // have to pay (loan type)
+        'pay_id': 2, // have to pay (loan type)
       },
       {
         'name': 'Piyush',
         'amount': 480,
         'made_with': 'none',
         'time': '7:00 am',
-        'pay_id': 4, // have to recieve
+        'pay_id': 3, // have to recieve
       },
     ];
     await Future.delayed(3.seconds());
