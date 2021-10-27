@@ -40,22 +40,47 @@ class DailyTansactionList extends StatelessWidget {
       child: Timeline.tileBuilder(
         builder: TimelineTileBuilder(
           itemCount: 3,
-          indicatorBuilder: (context, index) => Indicator.dot(
-            border: Border.all(color: Color(0xff606060), width: 2),
-            color: Colors.transparent,
-            size: 18,
-          ),
-          contentsBuilder: (context, index) => index % 2 == 0
-              ? Container(
-                  color: Colors.red,
-                  margin: EdgeInsets.all(20),
-                )
-              : Container(
-                  color: Colors.green,
-                  margin: EdgeInsets.all(20),
+          indicatorBuilder: (context, index) {
+            if (index == 0)
+              return ListIndicator(
+                type: 0,
+              );
+            else if (index == 1)
+              return ListIndicator(
+                type: 1,
+              );
+            return ListIndicator();
+          },
+          contentsBuilder: (context, index) {
+            if (index == 0)
+              return Container(
+                decoration: BoxDecoration(
+                  color: Color(0xffd0d0d0),
+                  borderRadius: BorderRadius.circular(24),
                 ),
-          startConnectorBuilder: (context, index) => Connector.solidLine(),
-          endConnectorBuilder: (context, index) => Connector.solidLine(),
+                margin: EdgeInsets.symmetric(vertical: 8, horizontal: 16),
+              );
+            else
+              return Container(
+                decoration: BoxDecoration(
+                  color: index % 2 == 0 ? Colors.red : Colors.green,
+                  borderRadius: BorderRadius.circular(24),
+                ),
+                margin: EdgeInsets.symmetric(vertical: 8, horizontal: 16),
+              );
+          },
+          startConnectorBuilder: (context, index) {
+            if (index != 0) return Connector.solidLine();
+          },
+          endConnectorBuilder: (context, index) {
+            if (index == 0)
+              return Connector.dashedLine(
+                dash: 4,
+                gap: 4,
+              );
+            else
+              return Connector.solidLine();
+          },
           itemExtent: 100,
           nodePositionBuilder: (context, index) => 0,
         ),
@@ -68,5 +93,53 @@ class DailyTansactionList extends StatelessWidget {
             indicatorTheme: IndicatorThemeData(color: Color(0xff606060))),
       ),
     );
+  }
+}
+
+class ListIndicator extends StatelessWidget {
+  const ListIndicator({Key? key, this.type}) : super(key: key);
+
+  final int? type;
+
+  @override
+  Widget build(BuildContext context) {
+    switch (type) {
+      case 0:
+        return Container(
+          height: 32,
+          width: 32,
+          decoration: BoxDecoration(
+            border: Border.all(color: Color(0xff606060), width: 2),
+            shape: BoxShape.circle,
+          ),
+          child: Icon(Icons.add_outlined),
+        );
+      case 1:
+        return Container(
+          height: 32,
+          width: 32,
+          decoration: BoxDecoration(
+            border: Border.all(color: Color(0xff606060), width: 2),
+            shape: BoxShape.circle,
+          ),
+          child: Container(
+            margin: EdgeInsets.all(8),
+            decoration: BoxDecoration(
+              color: Color(0xff606060),
+              shape: BoxShape.circle,
+            ),
+          ),
+        );
+      default:
+        return Container(
+          height: 32,
+          width: 32,
+          decoration: BoxDecoration(
+            border: Border.all(color: Color(0xff606060), width: 2),
+            shape: BoxShape.circle,
+          ),
+          child: Icon(Icons.keyboard_arrow_down_rounded),
+        );
+    }
   }
 }
