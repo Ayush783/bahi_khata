@@ -1,9 +1,11 @@
 import 'package:bahi_khata/blocs/fakeapi_bloc.dart';
+import 'package:bahi_khata/constants/textstyles.dart';
 import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:timelines/timelines.dart';
 
+//bloc builder
 class DailyTransactionsBuilder extends StatelessWidget {
   const DailyTransactionsBuilder({Key? key}) : super(key: key);
 
@@ -24,6 +26,7 @@ class DailyTransactionsBuilder extends StatelessWidget {
   }
 }
 
+//custom widget
 class DailyTansactionList extends StatelessWidget {
   const DailyTansactionList({
     Key? key,
@@ -69,15 +72,18 @@ class DailyTansactionList extends StatelessWidget {
           },
           contentsBuilder: (context, index) {
             if (index == 0)
-              return Container(
-                decoration: BoxDecoration(
-                  color: Color(0xffd0d0d0),
-                  borderRadius: BorderRadius.circular(24),
+              return InkWell(
+                child: Container(
+                  decoration: BoxDecoration(
+                    color: Color(0xffd0d0d0),
+                    borderRadius: BorderRadius.circular(24),
+                  ),
+                  margin: EdgeInsets.symmetric(vertical: 8, horizontal: 16),
                 ),
-                margin: EdgeInsets.symmetric(vertical: 8, horizontal: 16),
               );
             else
               return Container(
+                padding: EdgeInsets.symmetric(vertical: 4),
                 decoration: BoxDecoration(
                   color: getCardColor(listOnScreen.value[index - 1]['pay_id']),
                   borderRadius: BorderRadius.circular(24),
@@ -88,6 +94,21 @@ class DailyTansactionList extends StatelessWidget {
                       color: Colors.black.withOpacity(0.4),
                     ),
                   ],
+                ),
+                child: ListTile(
+                  title: Text(
+                    listOnScreen.value[index - 1]['name'],
+                    style: kTextstyle2.copyWith(fontSize: 20),
+                  ),
+                  subtitle: Text(
+                    '${listOnScreen.value[index - 1]['made_with']} | ${listOnScreen.value[index - 1]['time']}',
+                    style: kTextstyle2.copyWith(
+                        fontSize: 16, color: Color(0xfff7f7f7)),
+                  ),
+                  trailing: Text(
+                    '₹${listOnScreen.value[index - 1]['amount']}',
+                    style: kTextstyle1.copyWith(),
+                  ),
                 ),
                 margin: EdgeInsets.symmetric(vertical: 8, horizontal: 16),
               );
