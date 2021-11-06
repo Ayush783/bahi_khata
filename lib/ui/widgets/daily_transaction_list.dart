@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:bahi_khata/blocs/fakeapi_bloc.dart';
 import 'package:bahi_khata/constants/textstyles.dart';
 import 'package:dotted_border/dotted_border.dart';
@@ -82,35 +84,56 @@ class DailyTansactionList extends StatelessWidget {
                 ),
               );
             else
-              return Container(
-                padding: EdgeInsets.symmetric(vertical: 4),
-                decoration: BoxDecoration(
-                  color: getCardColor(listOnScreen.value[index - 1]['pay_id']),
-                  borderRadius: BorderRadius.circular(24),
-                  boxShadow: [
-                    BoxShadow(
-                      offset: Offset(3, 3),
-                      blurRadius: 10,
-                      color: Colors.black.withOpacity(0.4),
+              return InkWell(
+                onLongPress: () {},
+                child: Stack(
+                  children: [
+                    Container(
+                      padding: EdgeInsets.symmetric(vertical: 4),
+                      decoration: BoxDecoration(
+                        color: getCardColor(
+                            listOnScreen.value[index - 1]['pay_id']),
+                        borderRadius: BorderRadius.circular(24),
+                        boxShadow: [
+                          BoxShadow(
+                            offset: Offset(3, 3),
+                            blurRadius: 10,
+                            color: Colors.black.withOpacity(0.4),
+                          ),
+                        ],
+                      ),
+                      child: ListTile(
+                        title: Text(
+                          listOnScreen.value[index - 1]['name'],
+                          style: kTextstyle2.copyWith(fontSize: 20),
+                        ),
+                        subtitle: Text(
+                          '${listOnScreen.value[index - 1]['made_with']} | ${listOnScreen.value[index - 1]['time']}',
+                          style: kTextstyle2.copyWith(
+                              fontSize: 16, color: Color(0xfff7f7f7)),
+                        ),
+                        trailing: Text(
+                          '₹${listOnScreen.value[index - 1]['amount']}',
+                          style: kTextstyle1.copyWith(),
+                        ),
+                      ),
+                      margin: EdgeInsets.symmetric(vertical: 8, horizontal: 16),
+                    ),
+                    Container(
+                      decoration: BoxDecoration(
+                        color: Colors.grey.shade200.withOpacity(0.5),
+                        borderRadius: BorderRadius.circular(24),
+                      ),
+                      margin: EdgeInsets.symmetric(vertical: 8, horizontal: 16),
+                      child: ClipRect(
+                        child: BackdropFilter(
+                          filter: ImageFilter.blur(sigmaX: 10.0, sigmaY: 10.0),
+                          child: Container(),
+                        ),
+                      ),
                     ),
                   ],
                 ),
-                child: ListTile(
-                  title: Text(
-                    listOnScreen.value[index - 1]['name'],
-                    style: kTextstyle2.copyWith(fontSize: 20),
-                  ),
-                  subtitle: Text(
-                    '${listOnScreen.value[index - 1]['made_with']} | ${listOnScreen.value[index - 1]['time']}',
-                    style: kTextstyle2.copyWith(
-                        fontSize: 16, color: Color(0xfff7f7f7)),
-                  ),
-                  trailing: Text(
-                    '₹${listOnScreen.value[index - 1]['amount']}',
-                    style: kTextstyle1.copyWith(),
-                  ),
-                ),
-                margin: EdgeInsets.symmetric(vertical: 8, horizontal: 16),
               );
           },
           startConnectorBuilder: (context, index) {
@@ -142,6 +165,7 @@ class DailyTansactionList extends StatelessWidget {
   }
 }
 
+//list indicators
 class ListIndicator extends StatelessWidget {
   const ListIndicator({Key? key, this.type}) : super(key: key);
 
